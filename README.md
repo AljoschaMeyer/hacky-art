@@ -1,5 +1,13 @@
-# SSB Browser Choo
+# Hacky-Art
 
-A fairly smaall boilerplate that creates a single-site application that connects to a locally running ssb-server. The secret file is loaded via an html `input` element. Uses the choo framework.
+At some point, this might evolve into an ssb client.
 
-To build, run `npm run build`, then point an http-server to this directory. This only works while an ssb-server is running locally that exposes a websocket at port 8989.
+Usage:
+
+- run `npm run build`
+- start a webserver
+- start patchwork/patchbay
+- point a browser to the server
+- input the `~/.ssb/secret` file and click `Login`
+- enjoy the gallery of images
+- click on `Publish` to write your own image to the scuttleverse (warning: there's no preview step)
