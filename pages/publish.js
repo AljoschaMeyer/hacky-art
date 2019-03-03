@@ -29,8 +29,10 @@ module.exports = (state, emit) => {
         state.ssb.publish({
           type: 'tamaki:publication',
           img: hash,
-        }, (err, foo) => {
-          console.log(foo);
+        }, err => {
+          if (err) {
+            throw err;
+          }
           emit('pushState', '/');
         });
       })
