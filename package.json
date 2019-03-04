@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify index.js | indexhtmlify > index.html"
+    "build": "browserify index.js | indexhtmlify > index.html",
+    "start": "npm run build && http-server -o"
   },
   "author": "Aljoscha Meyer",
   "license": "AGPL-3.0",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "browserify": "^16.2.3",
+    "http-server": "^0.11.1",
     "indexhtmlify": "^2.0.0"
   }
 }
