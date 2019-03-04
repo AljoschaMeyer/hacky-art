@@ -61,7 +61,7 @@ function connect(emit, keys) {
     }
   }, (err, server) => {
     if (err) {
-      throw err
+      throw err;
     } else {
       if (document.querySelector('#autologin').checked) {
         localStorage.setItem('ssb-keys', JSON.stringify(keys));
@@ -70,44 +70,3 @@ function connect(emit, keys) {
     }
   })
 }
-
-//   <div class="instructions">
-//     Please point the browser to your ssb secret file.
-//     <input type="file" oninput=${oninput}></input>
-//   </div>
-// </body>`;
-
-//   function oninput(event) {
-//     const fr = new FileReader();
-//
-//     fr.onload = function() {
-//       try {
-//         const keys = JSON.parse(this.result.replace(/\s*\#[^\n]*/g, '')
-//         .split('\n').filter(x => !!x).join(''));
-//
-//         Connection(keys, {
-//           manifest: require('../manifest.json'),
-//           remote: `ws://localhost:${port}/~shs:${keys.public}`,
-//           caps: {
-//             shs: "1KHLiKZvAvjbY1ziZEHMXawbCEIM6qwjCDm3VYRan/s=",
-//             sign: null
-//           }
-//         }, (err, server) => {
-//           if (err) {
-//             throw err
-//           } else {
-//             emit('login', server);
-//           }
-//         })
-//       } catch (e) {
-//         emit('secret:error', e);
-//       }
-//     }
-//
-//     try {
-//       fr.readAsText(event.target.files[0]);
-//     } catch (e) {
-//       emit('secret:error', e);
-//     }
-//   }
-// };

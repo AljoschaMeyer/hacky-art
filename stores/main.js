@@ -23,7 +23,7 @@ module.exports = (state, emitter) => {
         pull(
           state.ssb.messagesByType({
             type: 'tamaki:publication',
-            reversed: true,
+            reverse: true,
             keys: false,
             limit: 100,
             live: false,
