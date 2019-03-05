@@ -1,7 +1,4 @@
 const html = require('choo/html');
-const Connection = require("ssb-client");
-
-const port = 8989;
 
 module.exports = (state, emit) => {
   const cached = localStorage.getItem('ssb-keys');
@@ -9,8 +6,8 @@ module.exports = (state, emit) => {
   if (cached) {
     try {
       const keys = JSON.parse(cached);
-      connect(emit, keys);
-      return html`<body></body>`;
+      emit('login:connect', keys);
+      return html`<body>Logging in...</body>`;
     } catch (e) {
       emit('secret:error', e);
     }
@@ -37,7 +34,7 @@ module.exports = (state, emit) => {
       try {
         const keys = JSON.parse(this.result.replace(/\s*\#[^\n]*/g, '')
         .split('\n').filter(x => !!x).join(''));
-        connect(emit, keys);
+        emit('login:connect', keys);
       } catch (err) {
         emit('secret:error', err);
       }
@@ -50,23 +47,3 @@ module.exports = (state, emit) => {
     }
   }
 };
-
-function connect(emit, keys) {
-  Connection(keys, {
-    manifest: require('../manifest.json'),
-    remote: `ws://localhost:${port}/~shs:${keys.public}`,
-    caps: {
-      shs: "1KHLiKZvAvjbY1ziZEHMXawbCEIM6qwjCDm3VYRan/s=",
-      sign: null
-    }
-  }, (err, server) => {
-    if (err) {
-      throw err;
-    } else {
-      if (document.querySelector('#autologin').checked) {
-        localStorage.setItem('ssb-keys', JSON.stringify(keys));
-      }
-      emit('login', server);
-    }
-  })
-}
