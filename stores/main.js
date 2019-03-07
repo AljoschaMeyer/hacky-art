@@ -90,7 +90,6 @@ module.exports = (state, emitter) => {
     // display human-readable author names as they become available
     emitter.on('main:author:loaded', ({id, name}) => {
       state.main.authorsLoaded.set(id, `@${name}`); // make the name available to the views (and incidentally cache it)
-      console.log(`setting id ${id} as ${name}`);
       emitter.emit('render');
     });
   });
