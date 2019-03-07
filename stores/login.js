@@ -1,4 +1,5 @@
-const Connection = require("ssb-client");
+const Connection = require('ssb-client');
+const aboutPlugin = require('ssb-about');
 
 const mainPage = require('../pages/main');
 
@@ -28,6 +29,13 @@ module.exports = (state, emitter, app) => {
 
     emitter.on('login:yay', ssb => {
       state.ssb = ssb; // give the app access to the ssb client connection
+
+      // init all plugins
+      const about = aboutPlugin.init(ssb);
+      state.plugins = {
+        about,
+      }
+
       app.route('/', mainPage);
       emitter.emit('pushState', '/'); // navigate to main page
     });

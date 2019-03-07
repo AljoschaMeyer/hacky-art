@@ -4,10 +4,16 @@ const publication = require('./publication');
 
 module.exports = (state, emit) => {
   return html`<ol class="publications">
-  ${state.main.pubs.map(msg => html`<li>${publication({
-      msg,
-      blob: state.main.imgsLoaded.get(msg.content.img),
-      ssb: state.ssb,
-    }, emit)}</li>`)}
+  ${state.main.pubs.map(msg => {
+    const authorCached = state.main.authorsLoaded.get(msg.author);
+    const author = authorCached ? authorCached : msg.author;
+
+    return html`<li>${publication({
+        msg,
+        author,
+        blob: state.main.imgsLoaded.get(msg.content.img),
+        ssb: state.ssb,
+      }, emit)}</li>`;
+  })}
 </ol>`;
 };

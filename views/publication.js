@@ -2,7 +2,7 @@ const html = require('choo/html');
 
 module.exports = (state, emit) => {
   return html`<div class="publication">
-<div class="author">${state.msg.author}</div>
+<div class="author">${state.author}</div>
 <time class="pubTime">Time: ${state.msg.timestamp}</time>
 ${
   state.blob ?
