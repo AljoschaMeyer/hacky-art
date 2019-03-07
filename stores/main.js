@@ -19,16 +19,28 @@ module.exports = (state, emitter) => {
         // tell the view to render a loading screen
         state.main.loading = true;
 
-        // start loading the main feed (we simply redo all the work each time
-        // the user goes to the main view)
+        const opts = {
+          limit: 100,
+          reverse: true,
+          query: [
+            {
+              $filter: {
+                value: {
+                  content: { type: 'tamaki:publication' },
+                  timestamp: {
+                    $gte: 0,
+                  }
+                }
+              }
+            },
+            {
+              $map: ['value'],
+            }
+          ]
+        };
+
         pull(
-          state.ssb.messagesByType({
-            type: 'tamaki:publication',
-            reverse: true,
-            keys: false,
-            limit: 100,
-            live: false,
-          }),
+          state.ssb.query.read(opts),
           pull.collect((err, pubs) => {
             if (err) {
               throw err;
@@ -56,7 +68,7 @@ module.exports = (state, emitter) => {
               }
 
               if (!state.main.authorsLoaded.has(author)) {
-                state.plugins.about.socialValue({ key: 'name', dest: author }, (err, name) => {
+                state.ssb.about.socialValue({ key: 'name', dest: author }, (err, name) => {
                   if (err) {
                     throw err;
                   }
