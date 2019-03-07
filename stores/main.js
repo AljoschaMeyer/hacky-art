@@ -3,6 +3,8 @@ const pull = require('pull-stream');
 const { getBlob } = require('../util');
 
 module.exports = (state, emitter) => {
+  state.status = 'loading';
+
   state.main = {
     loading: true, // true while waiting for the ssb messages that make up the main feed
     pubs: undefined, // becomes populated with an array of the loaded feed messages

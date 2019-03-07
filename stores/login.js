@@ -7,23 +7,35 @@ const port = 8989;
 
 module.exports = (state, emitter, app) => {
   emitter.on('DOMContentLoaded', () => {
-    emitter.on('login:connect', keys => {
-      console.log(keys);
-
-      const config = require('../config')
-      console.log(config);
-      Connection(config.keys, config, (err, server) => {
-        if (err) {
-          throw err;
-        } else {
-          // if (document.querySelector('#autologin').checked) {
-          //   localStorage.setItem('ssb-keys', JSON.stringify(keys));
-          // }
-          console.log('qwert');
-          emitter.emit('login:yay', server);
-        }
-      });
+    const config = require('../config');
+    Connection(config.keys, config, (err, server) => {
+      if (err) {
+        throw err;
+      } else {
+        // if (document.querySelector('#autologin').checked) {
+        //   localStorage.setItem('ssb-keys', JSON.stringify(keys));
+        // }
+        // console.log('qwert');
+        emitter.emit('login:yay', server);
+      }
     });
+
+    // emitter.on('login:connect', keys => {
+    //   console.log(keys);
+    //
+    //   const config = require('../config');
+    //   Connection(config.keys, config, (err, server) => {
+    //     if (err) {
+    //       throw err;
+    //     } else {
+    //       // if (document.querySelector('#autologin').checked) {
+    //       //   localStorage.setItem('ssb-keys', JSON.stringify(keys));
+    //       // }
+    //       console.log('qwert');
+    //       emitter.emit('login:yay', server);
+    //     }
+    //   });
+    // });
 
     emitter.on('login:yay', ssb => {
       state.ssb = ssb; // give the app access to the ssb client connection
