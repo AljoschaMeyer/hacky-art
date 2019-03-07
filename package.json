@@ -12,6 +12,7 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "choo": "^6.13.1",
+    "human-time": "0.0.2",
     "pull-filereader": "^1.0.1",
     "pull-stream": "^3.6.9",
     "ssb-about": "^2.0.0",
