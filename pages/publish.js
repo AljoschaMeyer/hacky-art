@@ -11,7 +11,11 @@ module.exports = (state, emit) => {
   <form onsubmit=${onsubmit}>
     <label for="imgInput">Select an image to publish</label>
     <input type="file" name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, , image/apng" required>
-    <input type="submit" name="publish" value="Publish" checked>
+    <label for="imgTitle">Title</label>
+    <input type="text" id="imgTitle">
+    <label for="imgDesc">Description</label>
+    <textarea name="imgDesc" id="imgDesc"></textarea>
+    <input type="submit" name="publish" value="Publish">
   </form>
 </body>`;
 
@@ -26,9 +30,17 @@ module.exports = (state, emit) => {
           throw err;
         }
 
+        const imgTitle = document.querySelector('#imgTitle');
+        const title = imgTitle.value;
+
+        const imgDesc = document.querySelector('#imgDesc');
+        const description = imgDesc.value;
+
         state.ssb.publish({
           type: 'tamaki:publication',
           img: hash,
+          title,
+          description,
         }, err => {
           if (err) {
             throw err;
