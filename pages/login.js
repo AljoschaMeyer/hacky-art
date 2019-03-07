@@ -26,24 +26,26 @@ module.exports = (state, emit) => {
 
   function onsubmit(event) {
     event.preventDefault();
+    console.log('emitted event');
+    emit('login:connect', null);
 
-    const fileInput = document.querySelector('#secret_file');
-    const fr = new FileReader();
-
-    fr.onload = function() {
-      try {
-        const keys = JSON.parse(this.result.replace(/\s*\#[^\n]*/g, '')
-        .split('\n').filter(x => !!x).join(''));
-        emit('login:connect', keys);
-      } catch (err) {
-        emit('secret:error', err);
-      }
-    }
-
-    try {
-      fr.readAsText(fileInput.files[0]);
-    } catch (err) {
-      emit('secret:error', err);
-    }
+    // const fileInput = document.querySelector('#secret_file');
+    // const fr = new FileReader();
+    //
+    // fr.onload = function() {
+    //   try {
+    //     const keys = JSON.parse(this.result.replace(/\s*\#[^\n]*/g, '')
+    //     .split('\n').filter(x => !!x).join(''));
+    //     emit('login:connect', keys);
+    //   } catch (err) {
+    //     emit('secret:error', err);
+    //   }
+    // }
+    //
+    // try {
+    //   fr.readAsText(fileInput.files[0]);
+    // } catch (err) {
+    //   emit('secret:error', err);
+    // }
   }
 };

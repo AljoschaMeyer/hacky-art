@@ -1,26 +1,42 @@
 {
-  "name": "ssb-browser-choo",
+  "name": "hacky-art",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify index.js | indexhtmlify > index.html",
-    "start": "npm run build && http-server -o"
+    "start": "electron index.js -- --title HackyArt",
+    "postinstall": "npm run rebuild",
+    "rebuild": "cross-script npm rebuild --runtime=electron \"--target=$(electron -v)\" \"--abi=$(electron --abi)\" --disturl=https://atom.io/download/atom-shell"
   },
   "author": "Aljoscha Meyer",
   "license": "AGPL-3.0",
   "dependencies": {
     "choo": "^6.13.1",
+    "electron-default-menu": "^1.0.1",
+    "electron-window-state": "^5.0.3",
     "human-time": "0.0.2",
+    "lodash.merge": "^4.6.1",
+    "node-abi": "^2.7.1",
     "pull-filereader": "^1.0.1",
     "pull-stream": "^3.6.9",
+    "quick-lru": "^2.0.0",
+    "ssb-about": "^2.0.0",
+    "ssb-backlinks": "^0.7.3",
+    "ssb-blobs": "^1.1.13",
     "ssb-client": "^4.6.0",
-    "ssb-keys": "^7.1.5"
+    "ssb-config": "^3.2.5",
+    "ssb-ebt": "^5.4.1",
+    "ssb-friends": "^4.0.0",
+    "ssb-gossip": "^1.0.6",
+    "ssb-keys": "^7.1.5",
+    "ssb-query": "^2.3.0",
+    "ssb-replicate": "^1.1.0",
+    "ssb-server": "^14.1.6",
+    "ssb-ws": "^6.0.0"
   },
   "devDependencies": {
-    "browserify": "^16.2.3",
-    "http-server": "^0.11.1",
-    "indexhtmlify": "^2.0.0"
+    "cross-script": "^1.0.5",
+    "electron": "^2.0.17"
   }
 }

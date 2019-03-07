@@ -1,4 +1,5 @@
 const Connection = require('ssb-client');
+const Config = require('ssb-config/inject');
 
 const mainPage = require('../pages/main');
 
@@ -7,20 +8,18 @@ const port = 8989;
 module.exports = (state, emitter, app) => {
   emitter.on('DOMContentLoaded', () => {
     emitter.on('login:connect', keys => {
-      Connection(keys, {
-        manifest: require('../manifest.json'),
-        remote: `ws://localhost:${port}/~shs:${keys.public}`,
-        caps: {
-          shs: "1KHLiKZvAvjbY1ziZEHMXawbCEIM6qwjCDm3VYRan/s=",
-          sign: null
-        }
-      }, (err, server) => {
+      console.log(keys);
+
+      const config = require('../config')
+      console.log(config);
+      Connection(config.keys, config, (err, server) => {
         if (err) {
           throw err;
         } else {
-          if (document.querySelector('#autologin').checked) {
-            localStorage.setItem('ssb-keys', JSON.stringify(keys));
-          }
+          // if (document.querySelector('#autologin').checked) {
+          //   localStorage.setItem('ssb-keys', JSON.stringify(keys));
+          // }
+          console.log('qwert');
           emitter.emit('login:yay', server);
         }
       });
