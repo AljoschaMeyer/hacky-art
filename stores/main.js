@@ -1,4 +1,5 @@
 const pull = require('pull-stream');
+const Lru = require('quick-lru');
 
 const { getBlob } = require('../util');
 
@@ -8,8 +9,8 @@ module.exports = (state, emitter) => {
   state.main = {
     loading: true, // true while waiting for the ssb messages that make up the main feed
     pubs: undefined, // becomes populated with an array of the loaded feed messages
-    imgsLoaded: new Map(), // map from blob ids to loaded blobs. Currently grows unbounded... TODO FIXME
-    authorsLoaded: new Map(), // map from author ids to names. Currently grows unbounded... TODO FIXME
+    imgCache: new Lru({maxSize: 100}),
+    authorCache: new Lru({maxSize: 100}),
   };
 
   emitter.on('DOMContentLoaded', () => {
@@ -55,7 +56,7 @@ module.exports = (state, emitter) => {
               const id = msg.content.img;
               const author = msg.author;
 
-              if (!state.main.imgsLoaded.has(id)) {
+              if (!state.main.imgCache.has(id)) {
                 getBlob(state.ssb, id, (err, blob) => {
                   if (err) {
                     throw err;
@@ -69,7 +70,7 @@ module.exports = (state, emitter) => {
                 });
               }
 
-              if (!state.main.authorsLoaded.has(author)) {
+              if (!state.main.authorCache.has(author)) {
                 state.ssb.about.socialValue({ key: 'name', dest: author }, (err, name) => {
                   if (err) {
                     throw err;
@@ -97,13 +98,13 @@ module.exports = (state, emitter) => {
 
     // display images as their blobs become available
     emitter.on('main:img:loaded', ({id, blob}) => {
-      state.main.imgsLoaded.set(id, blob); // make the blob available to the views (and incidentally cache it)
+      state.main.imgCache.set(id, blob);
       emitter.emit('render');
     });
 
     // display human-readable author names as they become available
     emitter.on('main:author:loaded', ({id, name}) => {
-      state.main.authorsLoaded.set(id, `@${name}`); // make the name available to the views (and incidentally cache it)
+      state.main.authorCache.set(id, `@${name}`);
       emitter.emit('render');
     });
   });
