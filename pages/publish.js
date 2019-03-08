@@ -23,6 +23,7 @@ module.exports = (state, emit) => {
     event.preventDefault();
 
     const imgInput = document.querySelector('#imgInput');
+    const imgSize = imgInput.files[0].size;
     pull(
       pullFileReader(imgInput.files[0]),
       state.ssb.blobs.add((err, hash) => {
@@ -41,6 +42,7 @@ module.exports = (state, emit) => {
           img: hash,
           title,
           description,
+          imgSize,
         }, err => {
           if (err) {
             throw err;
