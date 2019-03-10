@@ -8,14 +8,14 @@ const nav = require('../views/nav');
 module.exports = (state, emit) => {
   return html`<body>
   ${nav()}
-  <form onsubmit=${onsubmit}>
+  <form onsubmit="${onsubmit}">
     <label for="imgInput">Select an image to publish</label>
     <input type="file" name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, , image/apng" required>
     <label for="imgTitle">Title</label>
-    <input type="text" id="imgTitle">
+    <input type="text" name="imgTitle" id="imgTitle" value="${state.publishData.title}">
     <label for="imgDesc">Description</label>
-    <textarea name="imgDesc" id="imgDesc"></textarea>
-    <input type="submit" name="publish" value="Publish">
+    <textarea name="imgDesc" id="imgDesc">${state.publishData.description}</textarea>
+    <input type="submit" name="publish" value="Preview & Publish">
   </form>
 </body>`;
 
@@ -23,33 +23,20 @@ module.exports = (state, emit) => {
     event.preventDefault();
 
     const imgInput = document.querySelector('#imgInput');
-    const imgSize = imgInput.files[0].size;
-    pull(
-      pullFileReader(imgInput.files[0]),
-      state.ssb.blobs.add((err, hash) => {
-        if (err) {
-          throw err;
-        }
+    const imgFile = imgInput.files[0];
 
-        const imgTitle = document.querySelector('#imgTitle');
-        const title = imgTitle.value;
+    const imgTitle = document.querySelector('#imgTitle');
+    const title = imgTitle.value;
 
-        const imgDesc = document.querySelector('#imgDesc');
-        const description = imgDesc.value;
+    const imgDesc = document.querySelector('#imgDesc');
+    const description = imgDesc.value;
 
-        state.ssb.publish({
-          type: 'tamaki:publication',
-          img: hash,
-          title,
-          description,
-          imgSize,
-        }, err => {
-          if (err) {
-            throw err;
-          }
-          emit('pushState', '/');
-        });
-      })
-    );
+    emit('preview', {
+      imgFile,
+      title,
+      description,
+      authorCache: state.main.authorCache,
+      ssb: state.ssb,
+    });
   }
 }
