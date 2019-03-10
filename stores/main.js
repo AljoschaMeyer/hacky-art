@@ -31,6 +31,8 @@ module.exports = (state, emitter) => {
         paginatedQuery.next();
       } else if (paginate === 'prev') {
         paginatedQuery.prev();
+      } else if (paginate === 'first') {
+        paginatedQuery.reset();
       }
 
       paginatedQuery.run(state.ssb, (err, msgs) => {

@@ -19,10 +19,15 @@ module.exports = (state, emit) => {
     ssb: state.ssb,
   }, emit)}
   <nav>
+    <button onclick="${onclickFirst}">first</button>
     <button onclick="${onclickPrev}">prev</button>
     <button onclick="${onclickNext}">next</button>
   </nav>
   </body>`;
+
+    function onclickFirst() {
+      emit('main:load', 'first');
+    }
 
     function onclickPrev() {
       emit('main:load', 'prev');
