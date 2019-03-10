@@ -1,6 +1,6 @@
 const html = require('choo/html');
 
-const mainPage = require('./main');
+const feedPage = require('./feed');
 const errorPage = require('./error');
 
 module.exports = (state, emit) => {
@@ -8,7 +8,7 @@ module.exports = (state, emit) => {
     case 'connecting':
       return html`<body><div class="connecting">Connecting to the scuttleverse...</div></body>`;
     case 'connected':
-      return mainPage(state, emit);
+      return feedPage(state, emit);
     case 'error':
       return errorPage(state, emit);
     default:

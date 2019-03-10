@@ -1,9 +1,11 @@
 const html = require('choo/html');
 const human = require('human-time');
 
+const { escapeKey } = require('../helpers/escape');
+
 module.exports = (state, emit) => {
   return html`<div class="publication">
-<div class="author">${state.author}</div>
+<a class="author" href="/user/${escapeKey(state.authorId)}">${state.author}</a>
 <time class="pubTime">${human(new Date(state.msg.timestamp))}</time>
 ${
   typeof state.msg.content.title === 'string' && state.msg.content.title.length > 0 ?
