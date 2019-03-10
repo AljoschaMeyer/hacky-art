@@ -1,93 +1,81 @@
 const pull = require('pull-stream');
 const Lru = require('quick-lru');
 
-const { getBlob } = require('../util');
+const { getBlob, newPaginatedQuery } = require('../util');
 
 module.exports = (state, emitter) => {
-  state.status = 'loading';
-
   state.main = {
     loading: true, // true while waiting for the ssb messages that make up the main feed
     pubs: undefined, // becomes populated with an array of the loaded feed messages
-    imgCache: new Lru({maxSize: 100}),
-    authorCache: new Lru({maxSize: 100}),
+    imgCache: new Lru({maxSize: 120}),
+    authorCache: new Lru({maxSize: 120}),
   };
+
+  let paginatedQuery = newPaginatedQuery(30);
 
   emitter.on('DOMContentLoaded', () => {
     emitter.on('navigate', () => {
       if (
-        state.ssb && // user is logged in
+        state.ssb && // app is connected
         state.route === '/' // viewing the main feed
       ) {
-        // tell the view to render a loading screen
-        state.main.loading = true;
-
-        const opts = {
-          limit: 100,
-          reverse: true,
-          query: [
-            {
-              $filter: {
-                value: {
-                  content: { type: 'tamaki:publication' },
-                  timestamp: {
-                    $gte: 0,
-                  }
-                }
-              }
-            },
-            {
-              $map: ['value'],
-            }
-          ]
-        };
-
-        pull(
-          state.ssb.query.read(opts),
-          pull.collect((err, pubs) => {
-            if (err) {
-              throw err;
-            }
-            // tell the app when loading is done
-            emitter.emit('main:loaded', pubs);
-
-            // start loading all the blobs
-            pubs.forEach(msg => {
-              const id = msg.content.img;
-              const author = msg.author;
-
-              if (!state.main.imgCache.has(id)) {
-                getBlob(state.ssb, id, (err, blob) => {
-                  if (err) {
-                    throw err;
-                  }
-
-                  // tell the app when a blob has been loaded
-                  emitter.emit('main:img:loaded', {
-                    id,
-                    blob,
-                  });
-                });
-              }
-
-              if (!state.main.authorCache.has(author)) {
-                state.ssb.about.socialValue({ key: 'name', dest: author }, (err, name) => {
-                  if (err) {
-                    throw err;
-                  }
-
-                  // tell the app when a blob has been loaded
-                  emitter.emit('main:author:loaded', {
-                    id: author,
-                    name,
-                  });
-                });
-              }
-            });
-          })
-        );
+        emitter.emit('main:load');
       }
     });
+
+    emitter.on('main:load', paginate => {
+      // tell the view to render a loading screen
+      state.main.loading = true;
+
+      if (paginate === 'next') {
+        paginatedQuery.next();
+      } else if (paginate === 'prev') {
+        paginatedQuery.prev();
+      }
+
+      paginatedQuery.run(state.ssb, (err, msgs) => {
+        if (err) {
+          throw err;
+        }
+
+        // tell the app when loading is done
+        emitter.emit('main:loaded', msgs);
+
+        // start loading all the blobs
+        msgs.forEach(msg => {
+          const id = msg.content.img;
+          const author = msg.author;
+
+          if (!state.main.imgCache.has(id)) {
+            getBlob(state.ssb, id, (err, blob) => {
+              if (err) {
+                throw err;
+              }
+
+              // tell the app when a blob has been loaded
+              emitter.emit('main:img:loaded', {
+                id,
+                blob,
+              });
+            });
+          }
+
+          if (!state.main.authorCache.has(author)) {
+            state.ssb.about.socialValue({ key: 'name', dest: author }, (err, name) => {
+              if (err) {
+                throw err;
+              }
+
+              // tell the app when a blob has been loaded
+              emitter.emit('main:author:loaded', {
+                id: author,
+                name,
+              });
+            });
+          }
+        });
+      });
+  });
 
     // transition from loading screen to displaying the feed
     emitter.on('main:loaded', pubs => {

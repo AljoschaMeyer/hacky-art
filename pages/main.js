@@ -12,7 +12,24 @@ module.exports = (state, emit) => {
   } else {
     return html`<body>
   ${nav()}
-  ${publications(state, emit)}
+  ${publications({
+    pubs: state.main.pubs,
+    authorCache: state.main.authorCache,
+    imgCache: state.main.imgCache,
+    ssb: state.ssb,
+  }, emit)}
+  <nav>
+    <button onclick="${onclickPrev}">prev</button>
+    <button onclick="${onclickNext}">next</button>
+  </nav>
   </body>`;
+
+    function onclickPrev() {
+      emit('main:load', 'prev');
+    }
+
+    function onclickNext() {
+      emit('main:load', 'next');
+    }
   }
-}
+};
