@@ -12,5 +12,9 @@ module.exports = (state, emitter, app) => {
     emitter.on('publishData', data => {
       state.publishData = data;
     });
+
+    emitter.on('publishError', err => {
+      state.publishError = err;
+    });
   });
 };

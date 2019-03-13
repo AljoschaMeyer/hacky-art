@@ -48,10 +48,17 @@ module.exports = (state, emit) => {
           imgSize: preview.imgSize,
         }, err => {
           if (err) {
-            throw err;
+            emit('publishData', {
+              title: preview.title,
+              description: preview.description,
+            });
+            emit('publishError', err)
+            emit('pushState', '/publish');
+          } else {
+            emit('publishError'); // clears the error from the state
+            emit('publishData', {});
+            emit('pushState', '/');
           }
-          emit('publishData', {});
-          emit('pushState', '/');
         });
       })
     );

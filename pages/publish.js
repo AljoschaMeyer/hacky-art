@@ -8,6 +8,17 @@ const nav = require('../views/nav');
 module.exports = (state, emit) => {
   return html`<body>
   ${nav({ me: state.ssb.id })}
+  ${
+    state.publishError ?
+    html`<div class="error">
+      ${
+        state.publishError.message === 'encoded message must not be larger than 8192 bytes' ?
+        html`The description (or title) is too large, you'll need to cut some words.` :
+        html`An unexpected error occured.<code>${JSON.stringify(state.publishError)}</code>`
+      }
+    </div>` :
+    html``
+  }
   <form onsubmit="${onsubmit}">
     <label for="imgInput">Select an image to publish</label>
     <input type="file" name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, , image/apng" required>
