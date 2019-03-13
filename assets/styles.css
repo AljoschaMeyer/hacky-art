@@ -70,7 +70,7 @@ li.publication figcaption {
 h2.publicationTitle {
   font-size: 1.3em;
   font-weight: 700;
-  margin-bottom: 0.15em;
+  margin-bottom: 0;
 }
 
 div.authorAndTime {
@@ -81,11 +81,6 @@ div.authorAndTime {
 /* If there is no title given, don't indent our author */
 div.authorAndTime:first-child {
   text-align: center;
-}
-
-a.author:hover:before {
-  content: "⬧" ;
-  padding-right: 0.2em;
 }
 
 time.pubTime {
