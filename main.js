@@ -7,6 +7,7 @@ const feedPage = require('./pages/feed');
 const publishPage = require('./pages/publish');
 const previewPage = require('./pages/preview');
 const userPage = require('./pages/user');
+const publicationPage = require('./pages/publication');
 
 const connectionStore = require('./stores/connection');
 const feedStore = require('./stores/feed');
@@ -23,5 +24,6 @@ app.route('/connection', connectionPage);
 app.route('/publish', publishPage);
 app.route('/preview', previewPage);
 app.route('/user/:user', userPage);
+app.route('/publication/:publication', publicationPage);
 
 app.mount('body');

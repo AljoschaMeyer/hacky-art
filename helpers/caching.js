@@ -71,6 +71,27 @@ const getImg = (cache, ssb, emit, id) => {
   }
 };
 
+const getMsg = (cache, ssb, emit, id) => {
+  const cached = cache.get(id);
+  if (cached) {
+    return cached;
+  } else {
+    ssb.get(id, (err, msg) => {
+      if (err) {
+        throw err;
+      }
+
+      // tell the app when a msg has been loaded
+      emit('msg:loaded', {
+        id,
+        msg,
+      });
+    });
+
+    return undefined;
+  }
+};
+
 module.exports = {
   pageSize,
   newFeed,
@@ -78,4 +99,5 @@ module.exports = {
   getOrCreateFeed,
   getAuthor,
   getImg,
+  getMsg,
 };

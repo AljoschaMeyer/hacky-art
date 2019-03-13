@@ -16,6 +16,7 @@ module.exports = (state, emit) => {
         title: msg.content.title,
         description: msg.content.description,
         size: msg.content.size,
+        msgId: msg.msgId,
         author,
         authorId: msg.author,
         blob

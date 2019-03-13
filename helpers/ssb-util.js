@@ -41,9 +41,6 @@ const newPaginatedQuery = (pageSize, author) => {
             timestamp: { $gte: 0 }
           }
         }
-      },
-      {
-        $map: ['value'],
       }
     ]
   });
@@ -65,7 +62,11 @@ const newPaginatedQuery = (pageSize, author) => {
         if (msgs.length > 0) {
           currentTimestamp = msgs[0].timestamp;
           nextTimestamp = msgs[msgs.length - 1].timestamp;
-          return cb(null, msgs);
+          return cb(null, msgs.map(msg => {
+            const ret = msg.value;
+            ret.msgId = msg.key;
+            return ret;
+          }));
         } else {
           // query returned no results
           if (q.query[0].$filter.value.timestamp.$gte === 0) {

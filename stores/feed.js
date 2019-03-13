@@ -7,6 +7,7 @@ module.exports = (state, emitter) => {
   state.main = {
     imgCache: new Lru({maxSize: 120}),
     authorCache: new Lru({maxSize: 120}),
+    msgCache: new Lru({maxSize: 24}),
     mainFeed: newFeed(pageSize),
     authorFeeds: new Lru({maxSize: 3}), // map from author ids to objects like `mainFeed`
   };
@@ -62,6 +63,11 @@ module.exports = (state, emitter) => {
     // display human-readable author names as they become available
     emitter.on('author:loaded', ({id, name}) => {
       state.main.authorCache.set(id, `@${name}`);
+      emitter.emit('render');
+    });
+
+    emitter.on('msg:loaded', ({id, msg}) => {
+      state.main.msgCache.set(id, msg);
       emitter.emit('render');
     });
   });
