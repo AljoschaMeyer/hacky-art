@@ -18,7 +18,7 @@ module.exports = (state, emit) => {
         size: msg.content.size,
         author,
         authorId: msg.author,
-        blob,
+        blob
       }, emit)}</li>`;
   })}
 </ul>
