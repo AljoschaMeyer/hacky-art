@@ -1,3 +1,133 @@
-.publicationImg {
-    max-width: 90%;
+:root {
+  --primary-color: HSL(83, 76%, 90%);
+  --secondary-color: HSL(208, 25%, 22%);
+  --accent-color: HSL(40, 96%, 80%); 
+  --body_text: 'ia Writer Quattro';
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* This grid pattern taken from tachyon's debug-grid class.  Tachyons is great, see them at tachyons.io  */
+  background: var(--primary-color) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMklEQVR4AWOgCLz/b0epAa6UGuBOqQHOQHLUgFEDnAbcBZ4UGwDOkiCnkIhdgNgNxAYAiYlD+8sEuo8AAAAASUVORK5CYII=) repeat top left;
+  color: var(--secondary-color);
+  font-family: 'iA Writer Quattro';
+  font-size: 20px;
+  border-top: 7px solid var(--accent-color);
+  border-bottom: 7px solid var(--accent-color);
+  min-height: 100vh;
+}
+
+nav.mainNav {
+  padding: 1.5em;
+  padding-bottom: 0;
+}
+nav.mainNav a {
+  color: #136151;
+  text-decoration: none;
+  font-size: 1.3em;
+  padding-right: 0.5em;
+}
+
+nav.mainNav a:before {
+  content: "⬨";
+  padding-right: 0.1em;
+}
+
+nav.mainNav a:hover:before ,
+nav.mainNav a:active {
+   content: "⬧" ;
+}
+
+ul.publications {
+  margin: 0;
+  padding: 0;
+}
+
+li.publication {
+  margin: 0 auto 3em auto;
+  padding: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 7px solid var(--accent-color);
+}
+
+li.publication figure img{
+  max-width: 100%;
+  margin: auto;
+}
+
+li.publication figcaption {
+  max-width: 60vw;
+  margin: 2em auto 1em auto;
+}
+
+h2.publicationTitle {
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+div.authorAndTime {
+  margin-bottom: 1em;
+  font-style: italic;
+}
+
+/* If there is no title given, don't indent our author */
+div.authorAndTime:first-child {
+  text-align: center;
+}
+
+time.pubTime {
+  font-variant: small-caps;
+  font-size: 0.8em;
+}
+
+nav.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5em;
+}
+
+nav.pagination button {
+  margin: 0.5em;
+}
+
+@media (max-width: 667px) {
+  li.publication , figure {
+    padding: 0.25em;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 3em;
+  }
+  li.publication figcaption {
+    max-width: 100vw;
+    padding: 0.25em;
+    font-size: 16px;
+  }
+}
+
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url(fonts/quattro/iAWriterQuattroS-Regular.woff);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url(fonts/quattro/iAWriterQuattroS-Bold.woff);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url(fonts/quattro/iAWriterQuattroS-Italic.woff);
+  font-weight: normal;
+  font-style: italic;
 }
