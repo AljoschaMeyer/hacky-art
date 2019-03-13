@@ -16,14 +16,14 @@ module.exports = (state, emit) => {
     emit('feed:load', { author: user });
 
     return html`<body>
-    ${nav()}
+    ${nav({ me: state.ssb ? state.ssb.id : undefined })}
     ${userInfo({ id: user }, emit)}
     <h3 class="userId">${user}</h3>
     Loading...
   </body>`;
 } else {
   return html`<body>
-${nav()}
+${nav({ me: state.ssb.id })}
 ${userInfo({ id: user, author }, emit)}
 ${publications({
   msgs: feedState.msgs,

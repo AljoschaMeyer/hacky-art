@@ -7,7 +7,7 @@ const nav = require('../views/nav');
 
 module.exports = (state, emit) => {
   return html`<body>
-  ${nav()}
+  ${nav({ me: state.ssb.id })}
   <form onsubmit="${onsubmit}">
     <label for="imgInput">Select an image to publish</label>
     <input type="file" name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, , image/apng" required>
