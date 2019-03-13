@@ -6,12 +6,12 @@ const pagination = require('./pagination');
 const { getAuthor, getImg } = require('../helpers/caching');
 
 module.exports = (state, emit) => {
-  return html`<ol class="publications">
+  return html`<ul class="publications">
   ${state.msgs.map(msg => {
     const author = getAuthor(state.authorCache, state.ssb, emit, msg.author);
     const blob = new Blob(getImg(state.imgCache, state.ssb, emit, msg.content.img));
 
-    return html`<li>${publication({
+    return html`<li class="publication">${publication({
         timestamp: msg.timestamp,
         title: msg.content.title,
         description: msg.content.description,
@@ -21,7 +21,7 @@ module.exports = (state, emit) => {
         blob,
       }, emit)}</li>`;
   })}
-</ol>
+</ul>
 ${pagination({ author: state.author }, emit)}
 `;
 };
