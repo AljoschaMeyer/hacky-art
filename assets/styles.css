@@ -1,7 +1,7 @@
 :root {
   --primary-color: HSL(83, 76%, 90%);
   --secondary-color: HSL(208, 25%, 22%);
-  --accent-color: HSL(40, 96%, 80%); 
+  --accent-color: HSL(40, 96%, 80%);
   --body_text: 'ia Writer Quattro';
 }
 
@@ -84,8 +84,7 @@ div.authorAndTime:first-child {
 }
 
 time.pubTime {
-  font-variant: small-caps;
-  font-size: 0.8em;
+  display: none;
 }
 
 nav.pagination {
