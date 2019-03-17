@@ -6,7 +6,11 @@ module.exports = (state, emit) => {
   return html`<figure>
     ${
     state.blob ?
-    html`<a href="/publication/${escapeMsg(state.msgId)}">
+    html`<a href="${
+      state.msgId ?
+      `/publication/${escapeMsg(state.msgId)}` :
+      ''
+    }">
         <img class="publicationImg" src="${URL.createObjectURL(state.blob)}"></img>
       </a>` :
     html`<div class="imgLoading">Image loading...</div>`
