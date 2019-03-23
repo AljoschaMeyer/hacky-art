@@ -130,3 +130,21 @@ nav.pagination button {
   font-weight: normal;
   font-style: italic;
 }
+
+form {
+  padding: 1.5em;
+}
+
+#imgInput, #imgTitle, #imgDesc {
+  display: block;
+  margin-bottom: 1em;
+}
+
+#imgDesc {
+  width: 40em;
+  height: 25em;
+}
+
+#imgTitle {
+  width: 40em;
+}
