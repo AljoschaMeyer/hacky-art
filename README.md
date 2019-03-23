@@ -1,6 +1,6 @@
 # Hacky-Art
 
-At some point, this might evolve into an ssb client.
+I think this counts as an ssb client by now.
 
 Usage:
 
@@ -10,4 +10,4 @@ Usage:
 - starting the client
   - run `npm start`
   - enjoy the gallery of images
-  - click on `Publish` to write your own image to the scuttleverse (warning: there's no preview step)
+  - click on `Publish` to write your own image to the scuttleverse
