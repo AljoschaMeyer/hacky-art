@@ -27,6 +27,11 @@ module.exports = (state, emit) => {
     <time class="pubTime">${new Date(state.timestamp)}</time>
     </div>
     ${
+    typeof state.caption === 'string' && state.caption.length > 0 ?
+    html`<div class="publicationCaption">${state.caption}</div>` :
+    ''
+    }
+    ${
     typeof state.description === 'string' && state.description.length > 0 ?
     html`<div class="publicationDescription">${state.description}</div>` :
     ''

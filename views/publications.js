@@ -15,6 +15,7 @@ module.exports = (state, emit) => {
         timestamp: msg.timestamp,
         title: msg.content.title,
         description: msg.content.description,
+        caption: msg.content.caption,
         size: msg.content.size,
         msgId: msg.msgId,
         author,

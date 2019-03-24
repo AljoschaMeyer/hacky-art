@@ -135,16 +135,21 @@ form {
   padding: 1.5em;
 }
 
-#imgInput, #imgTitle, #imgDesc {
+#imgInput, #imgTitle, #imgDesc, #imgCaption {
   display: block;
   margin-bottom: 1em;
 }
 
-#imgDesc {
+#imgDesc, #imgCaption {
   width: 40em;
   height: 25em;
 }
 
 #imgTitle {
   width: 40em;
+}
+
+.publicationCaption {
+  margin-bottom: 2em;
+  font-style: italic;
 }

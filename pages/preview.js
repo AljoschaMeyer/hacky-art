@@ -15,6 +15,7 @@ module.exports = (state, emit) => {
       timestamp: Date.now(),
       title: preview.title,
       description: preview.description,
+      caption: preview.caption,
       size: preview.imgFile.size,
       author: getAuthor(preview.authorCache, preview.ssb, emit, preview.ssb.id),
       authorId: preview.ssb.id,
@@ -28,6 +29,7 @@ module.exports = (state, emit) => {
     emit('publishData', {
       title: preview.title,
       description: preview.description,
+      caption: preview.caption,
     });
     emit('pushState', '/publish');
   }
@@ -45,12 +47,14 @@ module.exports = (state, emit) => {
           img: hash,
           title: preview.title,
           description: preview.description,
+          caption: preview.caption,
           imgSize: preview.imgSize,
         }, err => {
           if (err) {
             emit('publishData', {
               title: preview.title,
               description: preview.description,
+              caption: preview.caption,
             });
             emit('publishError', err)
             emit('pushState', '/publish');

@@ -13,7 +13,7 @@ module.exports = (state, emit) => {
     html`<div class="error">
       ${
         state.publishError.message === 'encoded message must not be larger than 8192 bytes' ?
-        html`The description (or title) is too large, you'll need to cut some words.` :
+        html`The description, caption or title is too large, you'll need to cut some words.` :
         html`An unexpected error occured.<code>${JSON.stringify(state.publishError)}</code>`
       }
     </div>` :
@@ -26,6 +26,8 @@ module.exports = (state, emit) => {
     <input type="text" name="imgTitle" id="imgTitle" value="${state.publishData.title}">
     <label for="imgDesc">Description</label>
     <textarea name="imgDesc" id="imgDesc">${state.publishData.description}</textarea>
+    <label for="imgCaption">Caption</label>
+    <textarea name="imgCaption" id="imgCaption">${state.publishData.caption}</textarea>
     <input type="submit" name="publish" value="Preview & Publish">
   </form>
 </body>`;
@@ -42,10 +44,14 @@ module.exports = (state, emit) => {
     const imgDesc = document.querySelector('#imgDesc');
     const description = imgDesc.value;
 
+    const imgCaption = document.querySelector('#imgCaption');
+    const caption = imgCaption.value;
+
     emit('preview', {
       imgFile,
       title,
       description,
+      caption,
       authorCache: state.main.authorCache,
       ssb: state.ssb,
     });
