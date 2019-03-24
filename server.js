@@ -18,7 +18,7 @@ const createSbot = require('ssb-server')
   .use(require('ssb-blobs'))
   .use(require('ssb-ws'))
 
-  .use(require('ssb-about'))
+  .use(require('ssb-social-index')('about'))
   .use(require('ssb-backlinks'))
   .use(require('ssb-query'));
 

@@ -20,7 +20,6 @@
     "pull-filereader": "^1.0.1",
     "pull-stream": "^3.6.9",
     "quick-lru": "^2.0.0",
-    "ssb-about": "^2.0.0",
     "ssb-backlinks": "^0.7.3",
     "ssb-blobs": "^1.1.13",
     "ssb-client": "^4.6.0",
@@ -32,6 +31,7 @@
     "ssb-query": "^2.3.0",
     "ssb-replicate": "^1.1.0",
     "ssb-server": "^14.1.6",
+    "ssb-social-index": "^0.0.1",
     "ssb-ws": "^6.0.0"
   },
   "devDependencies": {
