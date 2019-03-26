@@ -26,7 +26,7 @@
 
 @font-face {
   font-family: 'IBM-Plex-Mono';
-  src: url(../IBM-Plex-Mono/IBMPlexMono-TextItalic.woff);
+  src: url(fonts/IBM-Plex-Mono/IBMPlexMono-TextItalic.woff);
   font-weight: normal;
   font-style: italic;
 }
