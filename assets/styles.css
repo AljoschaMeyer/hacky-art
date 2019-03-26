@@ -73,16 +73,19 @@ ul.publications {
   padding: 0;
 }
 
-li.publication {
+li.publication, div.publication {
   margin: 0 auto 3em auto;
   padding: 1.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+li.publication {
   border-bottom: 7px solid var(--accent-color);
 }
 
-li.publication figure {
+li.publication figure , div.publication figure{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -90,19 +93,19 @@ li.publication figure {
   margin-bottom: 0;
 }
 
-li.publication figure img{
+li.publication figure img , div.publication figure img {
   max-width: 100%;
 }
 
-li.publication figcaption {
-  max-width: 60vw;
+li.publication figcaption , div.publication figcaption {
+  max-width: 50vw;
   margin: 1em auto 1em auto;
   font-size: 0.75em;
   font-family: var(--secondary_text);
   font-style: italic;
 }
  
-li.publication div.description {
+li.publication div.description , div.publication div.description {
   max-width: 80%;
   margin: 1em auto auto auto;
 }
@@ -145,7 +148,7 @@ nav.pagination button {
 }
 
 @media (max-width: 667px) {
-  li.publication , figure {
+  li.publication , div.publication ,  figure {
     padding: 0.25em;
     margin-left: 0;
     margin-right: 0;
