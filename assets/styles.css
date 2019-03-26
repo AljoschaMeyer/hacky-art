@@ -87,6 +87,7 @@ li.publication figure {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0;
 }
 
 li.publication figure img{
@@ -103,7 +104,11 @@ li.publication figcaption {
  
 li.publication div.description {
   max-width: 80%;
-  margin: auto;
+  margin: 1em auto auto auto;
+}
+
+div.description div.publicationDescription {
+  margin: 1em auto 1.5em auto;
 }
 
 h2.publicationTitle {
@@ -115,7 +120,6 @@ h2.publicationTitle {
 a.author {
   text-decoration: none;
   margin-bottom: 1em;
-  font-weight: light;
   font-style: italic;
 
 }
