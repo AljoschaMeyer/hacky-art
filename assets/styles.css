@@ -2,8 +2,35 @@
   --primary-color: HSL(83, 76%, 90%);
   --secondary-color: HSL(208, 25%, 22%);
   --accent-color: HSL(40, 96%, 80%);
-  --body_text: 'ia Writer Quattro';
+  --primary_text: 'ia Writer Quattro';
+  --secondary_text: 'IBM-Plex-Mono';
 }
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url('fonts/quattro/iAWriterQuattroS-Regular.woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url(fonts/quattro/iAWriterQuattroS-Bold.woff);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'iA Writer Quattro';
+  src: url(fonts/quattro/iAWriterQuattroS-Italic.woff);
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'IBM-Plex-Mono';
+  src: url(fonts/IBM-Plex-Mono/IBMPlexMono-TextItalic.woff);
+  font-weight: normal;
+  font-style: italic;
+}
+
 
 body, html {
   margin: 0;
@@ -15,10 +42,8 @@ body {
   /* This grid pattern taken from tachyon's debug-grid class.  Tachyons is great, see them at tachyons.io  */
   background: var(--primary-color) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMklEQVR4AWOgCLz/b0epAa6UGuBOqQHOQHLUgFEDnAbcBZ4UGwDOkiCnkIhdgNgNxAYAiYlD+8sEuo8AAAAASUVORK5CYII=) repeat top left;
   color: var(--secondary-color);
-  font-family: 'iA Writer Quattro';
+  font-family: var(--primary_text);
   font-size: 20px;
-  border-top: 7px solid var(--accent-color);
-  border-bottom: 7px solid var(--accent-color);
   min-height: 100vh;
 }
 
@@ -57,14 +82,33 @@ li.publication {
   border-bottom: 7px solid var(--accent-color);
 }
 
+li.publication figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
 li.publication figure img{
   max-width: 100%;
-  margin: auto;
 }
 
 li.publication figcaption {
   max-width: 60vw;
-  margin: 2em auto 1em auto;
+  margin: 1em auto 1em auto;
+  font-size: 0.75em;
+  font-family: var(--secondary_text);
+  font-style: italic;
+}
+ 
+li.publication div.description {
+  max-width: 80%;
+  margin: 1em auto auto auto;
+}
+
+div.description div.publicationDescription {
+  margin: 1em auto 1.5em auto;
 }
 
 h2.publicationTitle {
@@ -73,13 +117,15 @@ h2.publicationTitle {
   margin-bottom: 0;
 }
 
-div.authorAndTime {
+a.author {
+  text-decoration: none;
   margin-bottom: 1em;
   font-style: italic;
+
 }
 
 /* If there is no title given, don't indent our author */
-div.authorAndTime:first-child {
+.author:first-child {
   text-align: center;
 }
 
@@ -112,24 +158,6 @@ nav.pagination button {
   }
 }
 
-@font-face {
-  font-family: 'iA Writer Quattro';
-  src: url(fonts/quattro/iAWriterQuattroS-Regular.woff);
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: 'iA Writer Quattro';
-  src: url(fonts/quattro/iAWriterQuattroS-Bold.woff);
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: 'iA Writer Quattro';
-  src: url(fonts/quattro/iAWriterQuattroS-Italic.woff);
-  font-weight: normal;
-  font-style: italic;
-}
 
 form {
   padding: 1.5em;
@@ -147,9 +175,4 @@ form {
 
 #imgTitle {
   width: 40em;
-}
-
-.publicationCaption {
-  margin-bottom: 2em;
-  font-style: italic;
 }
