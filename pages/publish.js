@@ -32,11 +32,13 @@ module.exports = (state, emit) => {
       `
     }
     <label for="imgCaption">Caption</label>
-    <textarea name="imgCaption" id="imgCaption">${state.publishData.caption}</textarea>
+      <textarea name="imgCaption" id="imgCaption" placeholder="HEY HEY WRITE A CAPTION!  Please describe, as accurately and concisely as possible, the visual details of your image. This wouldn't be additional context or stories about the image, but a literal description of it.  This helps accessibility for visually impaired friends."></textarea>
     <label for="imgTitle">Title</label>
-    <input type="text" name="imgTitle" id="imgTitle" value="${state.publishData.title}">
+      <input type="text" name="imgTitle" id="imgTitle" value="" placeholder="HEY HEY WRITE A TITLE!">
     <label for="imgDesc">Description</label>
-    <textarea name="imgDesc" id="imgDesc">${state.publishData.description}</textarea>
+    <span class='description'>
+      <textarea name="imgDesc" id="imgDesc" placeholder="AND HEY HEY, WRITE A DESCRIPTION!  Here is the best place for any feelings, contexts, stories, and what-have-you about the image you've shared.  It's optional of course.  Everything is."></textarea>
+    </span>
     <input type="submit" name="publish" value="Preview & Publish">
   </form>
 </body>`;

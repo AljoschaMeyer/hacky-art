@@ -73,7 +73,9 @@ ul.publications {
   padding: 0;
 }
 
-li.publication, div.publication {
+li.publication ,
+div.publication ,
+#publish-form {
   margin: 0 auto 3em auto;
   padding: 1.5em;
   display: flex;
@@ -85,7 +87,8 @@ li.publication {
   border-bottom: 7px solid var(--accent-color);
 }
 
-li.publication figure , div.publication figure{
+li.publication figure ,
+div.publication figure {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,31 +96,65 @@ li.publication figure , div.publication figure{
   margin-bottom: 0;
 }
 
-li.publication figure img , div.publication figure img {
+li.publication figure img ,
+div.publication figure img {
   max-width: 100%;
 }
 
-li.publication figcaption , div.publication figcaption {
+li.publication figcaption ,
+div.publication figcaption {
   max-width: 50vw;
   margin: 1em auto 1em auto;
   font-size: 0.75em;
   font-family: var(--secondary_text);
   font-style: italic;
 }
- 
-li.publication div.description , div.publication div.description {
+
+li.publication div.description ,
+div.publication div.description {
   max-width: 80%;
   margin: 1em auto auto auto;
 }
+#publish-form span.description {
+  max-width: 80%;
+}
 
-div.description div.publicationDescription {
+#publish-form textarea#imgDesc {
+  background: none;
+  border: none;
+  width: 70vw;
+  min-height: 150px;
+  font-size: 20px;
+}
+
+#publish-form textarea#imgDesc::placeholder {
+  font-size: 20px;
+}
+
+
+
+div.description ,
+div.publicationDescription ,
+#publish-form textarea#imgDesc {
   margin: 1em auto 1.5em auto;
 }
 
-h2.publicationTitle {
+h2.publicationTitle ,
+form#publish-form input#imgTitle {
   font-size: 1.3em;
   font-weight: 700;
   margin-bottom: 0;
+}
+
+form#publish-form input#imgTitle {
+  background: none;
+  border: none;
+  width: 70vw;
+}
+
+form#publish-form ::placeholder {
+  opacity: 1;
+  color: var(--primary_color);
 }
 
 a.author {
@@ -161,21 +198,36 @@ nav.pagination button {
   }
 }
 
-
-form {
-  padding: 1.5em;
-}
-
-#imgInput, #imgTitle, #imgDesc, #imgCaption {
-  display: block;
+#publish-form label[for="imgInput"] {
+  font-size: 2em;
   margin-bottom: 1em;
 }
 
-#imgDesc, #imgCaption {
-  width: 40em;
-  height: 25em;
+#publish-form label:not([for='imgInput']) {
+  display: none;
 }
 
-#imgTitle {
-  width: 40em;
+#publish-form input[type='file'] {
+  margin-bottom: 2em;
+}
+
+#publish-form #imgCaption {
+  width: 50vw;
+  height: 150px;
+  border: none;
+  background: transparent;
+  margin: 1em auto 2em auto;
+  font-family: var(--secondary_text);
+  font-style: italic;
+}
+
+#publish-form #imgCaption::placeholder, #imgCaption {
+  font-size: 18px;
+}
+
+#publish-form input[type='submit'] {
+  margin-top: 0;
+  width: 50vw;
+  height: 40px;
+  background: var(--accent-color);
 }
