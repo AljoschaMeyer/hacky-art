@@ -12,7 +12,6 @@ module.exports = (state, emitter, app) => {
 
     emitter.on('preview image added', data => {
         state.publishInput.blob = data;
-        console.log({imgState: state.publishInput})
         emitter.emit('pushState', '/publish')
     });
 
@@ -22,6 +21,7 @@ module.exports = (state, emitter, app) => {
     });
 
     emitter.on('publishData', data => {
+      state.publishInput= {};
       state.publishData = data;
     });
 
