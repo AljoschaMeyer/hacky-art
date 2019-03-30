@@ -31,7 +31,7 @@
     "ssb-query": "^2.3.0",
     "ssb-replicate": "^1.1.0",
     "ssb-server": "^14.1.6",
-    "ssb-social-index": "^0.0.1",
+    "ssb-social-index": "^1.0.0",
     "ssb-ws": "^6.0.0"
   },
   "devDependencies": {
