@@ -75,6 +75,7 @@ ul.publications {
 
 li.publication ,
 div.publication ,
+div.preview ,
 #publish-form {
   margin: 0 auto 3em auto;
   padding: 1.5em;
@@ -88,7 +89,9 @@ li.publication {
 }
 
 li.publication figure ,
-div.publication figure {
+div.preview figure ,
+div.publication figure ,
+span.publish-figure {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -97,11 +100,14 @@ div.publication figure {
 }
 
 li.publication figure img ,
-div.publication figure img {
+div.preview figure img ,
+div.publication figure img ,
+span.publish-figure img {
   max-width: 100%;
 }
 
 li.publication figcaption ,
+div.preview figcaption ,
 div.publication figcaption {
   max-width: 50vw;
   margin: 1em auto 1em auto;
@@ -111,6 +117,7 @@ div.publication figcaption {
 }
 
 li.publication div.description ,
+div.preview div.description ,
 div.publication div.description {
   max-width: 80%;
   margin: 1em auto auto auto;
@@ -130,8 +137,6 @@ div.publication div.description {
 #publish-form textarea#imgDesc::placeholder {
   font-size: 20px;
 }
-
-
 
 div.description ,
 div.publicationDescription ,
@@ -198,17 +203,28 @@ nav.pagination button {
   }
 }
 
-#publish-form label[for="imgInput"] {
+#img-input-form {
+  height: 80vh;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#img-input-form label[for="imgInput"],
+div.publish-form-addl-details h1 {
   font-size: 2em;
   margin-bottom: 1em;
 }
 
-#publish-form label:not([for='imgInput']) {
-  display: none;
+div.publish-form-addl-details h1 {
+  text-align: center;
 }
 
-#publish-form input[type='file'] {
-  margin-bottom: 2em;
+#publish-form label {
+  display: none;
 }
 
 #publish-form #imgCaption {
@@ -221,7 +237,8 @@ nav.pagination button {
   font-style: italic;
 }
 
-#publish-form #imgCaption::placeholder, #imgCaption {
+#publish-form #imgCaption::placeholder ,
+#imgCaption {
   font-size: 18px;
 }
 
@@ -231,3 +248,38 @@ nav.pagination button {
   height: 40px;
   background: var(--accent-color);
 }
+
+#publish-form button#removeImg ,
+#publish-preview button {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  height: 40px;
+  background: var(--accent-color);
+}
+
+#publish-preview button {
+  margin-bottom: 0.5em;
+  font-size: 24px;
+  background: var(--accent-color);
+}
+
+textarea#imgCaption:focus,
+input#imgTitle:focus,
+textarea#imgDesc:focus {
+  background: var(--accent-color) !important;
+  opacity: 0.5;
+}
+
+#publish-form input[name="imgInput"]{
+  display: none !important;
+}
+
+#publish-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+

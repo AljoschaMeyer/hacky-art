@@ -19,28 +19,43 @@ module.exports = (state, emit) => {
     </div>`
     : html``
   }
-  <form onsubmit="${onsubmit}" id='publish-form'>
-    ${state.publishInput.blob
-      ? html`
-        <div>
-          <button onclick=${removeImage}>Remove Image</button>
-          <img class="publicationImg" src="${URL.createObjectURL(state.publishInput.blob)}" />
-        </div>`
-      : html`
-        <label for="imgInput">Select an image to publish</label>
-        <input type="file" onchange=${onChange} name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, , image/apng" required>
+  ${state.publishInput.blob
+  // When an image file has been selected, display the add'l details form
+    ? html`
+      <div class='publish-form-addl-details'>
+      <h1>Add Additional Details</h1>
+      <form onsubmit="${onsubmit}" id='publish-form'>
+          <span class='publish-figure'>
+            <img class="publicationImg" src="${URL.createObjectURL(state.publishInput.blob)}" />
+            <button id="removeImg" onclick=${removeImage}>Remove Image</button>
+            <input class='hidden' disabled type="file" name="imgInput" id="imgInput" accept="image/gif, image/jpeg, image/png, image/apng" >
+            <label for="imgCaption">Caption</label>
+            <textarea name="imgCaption" id="imgCaption" placeholder="HEY HEY, CLICK TO WRITE A CAPTION HERE!  Please describe, as accurately and concisely as possible, the visual details of your image. This wouldn't be additional context or stories about the image, but a literal description of it.  This helps accessibility for visually impaired friends."></textarea>
+          </span>
+          <label for="imgTitle">Title</label>
+          <input type="text" name="imgTitle" id="imgTitle" value="" placeholder="HEY HEY WRITE A TITLE HERE!">
+          <label for="imgDesc">Description</label>
+          <span class='description'>
+            <textarea name="imgDesc" id="imgDesc" placeholder="AND HEY HEY, WRITE A DESCRIPTION HERE!  Here is the best place for any feelings, contexts, stories, and what-have-you about the image you've shared.  It's optional of course.  Everything is."></textarea>
+          </span>
+          <input type="submit" name="publish" value="Preview & Publish">
+        </form>
+        </div>
+        `
+  // Otherwise, display the image file selector
+    : html`
+        <form id='img-input-form'>
+          <label for="imgInput">Select an image to publish</label>
+        <input
+          type="file"
+          onchange=${onChange}
+          name="imgInput"
+          id="imgInput"
+          accept="image/gif, image/jpeg, image/png, , image/apng"
+          required>
+        </form>
       `
     }
-    <label for="imgCaption">Caption</label>
-      <textarea name="imgCaption" id="imgCaption" placeholder="HEY HEY WRITE A CAPTION!  Please describe, as accurately and concisely as possible, the visual details of your image. This wouldn't be additional context or stories about the image, but a literal description of it.  This helps accessibility for visually impaired friends."></textarea>
-    <label for="imgTitle">Title</label>
-      <input type="text" name="imgTitle" id="imgTitle" value="" placeholder="HEY HEY WRITE A TITLE!">
-    <label for="imgDesc">Description</label>
-    <span class='description'>
-      <textarea name="imgDesc" id="imgDesc" placeholder="AND HEY HEY, WRITE A DESCRIPTION!  Here is the best place for any feelings, contexts, stories, and what-have-you about the image you've shared.  It's optional of course.  Everything is."></textarea>
-    </span>
-    <input type="submit" name="publish" value="Preview & Publish">
-  </form>
 </body>`;
 
   function onChange (event) {
@@ -59,7 +74,7 @@ module.exports = (state, emit) => {
     event.preventDefault();
 
     const imgInput = document.querySelector('#imgInput');
-    const imgFile = imgInput.files[0];
+    var imgFile = imgInput.files[0];
 
     const imgTitle = document.querySelector('#imgTitle');
     const title = imgTitle.value;
@@ -69,6 +84,10 @@ module.exports = (state, emit) => {
 
     const imgCaption = document.querySelector('#imgCaption');
     const caption = imgCaption.value;
+
+    if (!imgFile) {
+      imgFile = state.publishInput.blob
+    }
 
     emit('preview', {
       imgFile,
