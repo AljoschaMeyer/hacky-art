@@ -1,9 +1,9 @@
-const html = require('choo/html')
-const pull = require('pull-stream')
-const once = require('pull-stream/sources/once')
-const pullFileReader = require('pull-filereader')
+const html = require('choo/html');
+const pull = require('pull-stream');
+const once = require('pull-stream/sources/once');
+const pullFileReader = require('pull-filereader');
 
-const nav = require('../views/nav')
+const nav = require('../views/nav');
 
 module.exports = (state, emit) => {
   return html`<body>
@@ -62,19 +62,19 @@ module.exports = (state, emit) => {
     event.preventDefault();
     const imgInput = document.querySelector('#imgInput');
     const imgFile = imgInput.files[0];
-    emit('preview image added', imgFile)
+    emit('preview image added', imgFile);
   }
 
   function removeImage () {
-    event.preventDefault()
-    emit('preview image removed')
+    event.preventDefault();
+    emit('preview image removed');
   }
 
   function onsubmit(event) {
     event.preventDefault();
 
     const imgInput = document.querySelector('#imgInput');
-    var imgFile = imgInput.files[0];
+    let imgFile = imgInput.files[0];
 
     const imgTitle = document.querySelector('#imgTitle');
     const title = imgTitle.value;
@@ -86,7 +86,7 @@ module.exports = (state, emit) => {
     const caption = imgCaption.value;
 
     if (!imgFile) {
-      imgFile = state.publishInput.blob
+      imgFile = state.publishInput.blob;
     }
 
     emit('preview', {
