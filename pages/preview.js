@@ -21,8 +21,10 @@ module.exports = (state, emit) => {
       authorId: preview.ssb.id,
       blob: preview.imgFile,
     }, emit)}</div>
-  <button class="previewCancel" onclick="${oncancel}">Cancel</button>
-  <button class="previewConfirm" onclick="${onconfirm}">Confirm</button>
+  <div id='publish-preview'>
+    <button class="previewConfirm" onclick="${onconfirm}">Confirm</button>
+    <button class="previewCancel" onclick="${oncancel}">Cancel</button>
+  </div>
 </body>`;
 
   function oncancel() {
