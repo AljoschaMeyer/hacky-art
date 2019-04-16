@@ -8,12 +8,12 @@ module.exports = (state, emit) => {
     emit('feed:load', {});
 
     return html`<body>
-  ${nav({ me: state.ssb ? state.ssb.id : undefined })}
+  ${nav({ me: state.ssb ? state.ssb.id : undefined }, emit)}
   Loading...
 </body>`;
   } else {
     return html`<body>
-  ${nav({ me: state.ssb.id })}
+  ${nav({ me: state.ssb.id }, emit)}
   ${publications({
     msgs: state.main.mainFeed.msgs,
     authorCache: state.main.authorCache,

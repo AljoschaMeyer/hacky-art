@@ -7,7 +7,7 @@ const nav = require('../views/nav');
 
 module.exports = (state, emit) => {
   return html`<body>
-  ${nav({ me: state.ssb.id })}
+  ${nav({ me: state.ssb.id }, emit)}
   ${
   state.publishError
     ? html`<div class="error">
