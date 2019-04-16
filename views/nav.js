@@ -5,6 +5,7 @@ const { escapeKey } = require('../helpers/escape');
 module.exports = (state, emit) => {
   return html`<nav class="mainNav">
   <a href="/">Home</a>
+  <a href="javascript:history.go(-1)">Go Back</a>
   ${
     state.me ?
     html`<a href="/user/${escapeKey(state.me)}">Me</a>` :
