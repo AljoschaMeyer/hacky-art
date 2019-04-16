@@ -12,7 +12,7 @@ module.exports = (state, emit) => {
 
   if (!msg) {
     return html`<body>
-    ${nav({ me: state.ssb ? state.ssb.id : undefined }, emit)}
+    ${nav({ me: state.ssb ? state.ssb.id : undefined })}
     <h3 class="msgId">${msgId}</h3>
     Loading...
   </body>`;
@@ -21,7 +21,7 @@ module.exports = (state, emit) => {
   const blob = new Blob(getImg(state.main.imgCache, state.ssb, emit, msg.content.img));
 
   return html`<body>
-${nav({ me: state.ssb.id }, emit)}
+${nav({ me: state.ssb.id })}
 <div class="publication">${publication({
     timestamp: msg.timestamp,
     title: msg.content.title,

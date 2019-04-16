@@ -23,7 +23,7 @@ module.exports = (state, emit) => {
   </body>`;
 } else {
   return html`<body>
-${nav({ me: state.ssb.id }, emit)}
+${nav({ me: state.ssb.id })}
 ${userInfo({ id: user, author }, emit)}
 ${publications({
   msgs: feedState.msgs,

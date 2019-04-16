@@ -3,6 +3,7 @@ const pull = require('pull-stream');
 const once = require('pull-stream/sources/once');
 const pullFileReader = require('pull-filereader');
 
+const nav = require('../views/nav');
 const publication = require('../views/publication');
 
 const { getAuthor } = require('../helpers/caching');
